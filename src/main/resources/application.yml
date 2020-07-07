@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    hikari:
+      username: root
+      password: 123456
+      # com.mysql.cj.jdbc.Driver => 如果是6.x或者更高版本
+      # com.mysql.jdbc.Driver => 如果connect版本是5.x
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://47.111.239.37:3306/content_center
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+        cluster-name: BJ
+#        namespace: 0674b132-f85c-451f-b5b5-ed81b759294e
+        metadata:
+          version: v1
+          target-version: v1
+  application:
+    name: content-center
+
+server:
+  port: 8010
+
+#user-center:
+#  ribbon:
+#    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+# ribbon 配置饥饿加载
+ribbon:
+  eager-load:
+    enabled: true
+    clients: user-center

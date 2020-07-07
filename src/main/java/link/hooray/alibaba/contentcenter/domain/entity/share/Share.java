@@ -1,0 +1,110 @@
+package link.hooray.alibaba.contentcenter.domain.entity.share;
+
+import java.util.Date;
+import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+/**
+ * 分享表
+ */
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "`share`")
+public class Share {
+    /**
+     * id
+     */
+    @Id
+    @Column(name = "id")
+    @GeneratedValue(generator = "JDBC")
+    private Integer id;
+
+    /**
+     * 发布人id
+     */
+    @Column(name = "user_id")
+    private Integer userId;
+
+    /**
+     * 标题
+     */
+    @Column(name = "title")
+    private String title;
+
+    /**
+     * 创建时间
+     */
+    @Column(name = "create_time")
+    private Date createTime;
+
+    /**
+     * 修改时间
+     */
+    @Column(name = "update_time")
+    private Date updateTime;
+
+    /**
+     * 是否原创 0:否 1:是
+     */
+    @Column(name = "is_original")
+    private Boolean isOriginal;
+
+    /**
+     * 作者
+     */
+    @Column(name = "author")
+    private String author;
+
+    /**
+     * 封面
+     */
+    @Column(name = "cover")
+    private String cover;
+
+    /**
+     * 概要信息
+     */
+    @Column(name = "summary")
+    private String summary;
+
+    /**
+     * 价格（需要的积分）
+     */
+    @Column(name = "price")
+    private Integer price;
+
+    /**
+     * 下载地址
+     */
+    @Column(name = "download_url")
+    private String downloadUrl;
+
+    /**
+     * 下载数
+     */
+    @Column(name = "buy_count")
+    private Integer buyCount;
+
+    /**
+     * 是否显示 0:否 1:是
+     */
+    @Column(name = "show_flag")
+    private Boolean showFlag;
+
+    /**
+     * 审核状态 NOT_YET: 待审核 PASSED:审核通过 REJECTED:审核不通过
+     */
+    @Column(name = "audit_status")
+    private String auditStatus;
+
+    /**
+     * 审核不通过原因
+     */
+    @Column(name = "reason")
+    private String reason;
+}
