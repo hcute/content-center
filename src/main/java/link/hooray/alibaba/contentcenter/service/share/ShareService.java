@@ -4,6 +4,7 @@ import link.hooray.alibaba.contentcenter.dao.share.ShareMapper;
 import link.hooray.alibaba.contentcenter.domain.dto.share.ShareDTO;
 import link.hooray.alibaba.contentcenter.domain.dto.user.UserDTO;
 import link.hooray.alibaba.contentcenter.domain.entity.share.Share;
+import link.hooray.alibaba.contentcenter.feignclient.UserCenterFeignClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -31,9 +32,11 @@ public class ShareService {
 
     private final ShareMapper shareMapper;
 
-    private final RestTemplate restTemplate;
+//    private final RestTemplate restTemplate;
 
     private final DiscoveryClient discoveryClient;
+
+    private final UserCenterFeignClient userCenterFeignClient;
 
     public ShareDTO findById(Integer id){
 
@@ -57,12 +60,15 @@ public class ShareService {
 //        String targetURL = targetURLS.get(i);
 
         // 使用Ribbon整合restTemplate 实现负载均衡
+
+
         // 这里存在问题，代码不可读，复杂url好烦，引出了feign
-        String targetURL = "http://user-center/users/{id}";
+        /*String targetURL = "http://user-center/users/{id}";
         log.info("请求的目标地址：{}" ,targetURL);
-        UserDTO userDTO = this.restTemplate.getForObject(targetURL, UserDTO.class, userId);
+        UserDTO userDTO = this.restTemplate.getForObject(targetURL, UserDTO.class, userId);*/
 
-
+        //使用feignClient 实现
+        UserDTO userDTO = userCenterFeignClient.findById(id);
         ShareDTO shareDTO = new ShareDTO();
         BeanUtils.copyProperties(share,shareDTO);
         shareDTO.setWxNickName(userDTO.getWxNickname());

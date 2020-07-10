@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Configuration;
 import ribbonconfiguration.RibbonConfiguration;
 
 /**
- * @ClassName UserCenterRibbonConfiguration
+ * @ClassName UserCenterRibbonConfigurationmvn
  * @Description: java代码方式配置Ribbon
  * @Author hooray
  * @Date 2020/7/7
